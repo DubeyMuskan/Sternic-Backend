@@ -16,6 +16,10 @@ const users = [
   },
 ];
 
+const PORT = process.env.PORT || 6060;
+const BASE_URL =
+  process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
@@ -26,7 +30,8 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:6060",
+        url: `${BASE_URL}`,
+        description: "Current server",
       },
     ],
   },
@@ -74,7 +79,6 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *             example:
  *               message: Wrong Password
  */
-
 app.post("/api/login", async (req, res) => {
   const { username, password } = req.body;
   const user = users.find((u) => u.username === username);
@@ -129,7 +133,6 @@ app.post("/api/login", async (req, res) => {
  *             example:
  *               message: User not found
  */
-
 app.post("/api/forgot", async (req, res) => {
   const { username, password } = req.body;
 
@@ -146,7 +149,10 @@ app.post("/api/forgot", async (req, res) => {
   });
 });
 
-const PORT = 6060;
+app.get("/", (req, res) => {
+  res.send("Backend is live!");
+});
+
 app.listen(PORT, () => {
-  console.log(`Server running on: http://localhost:${PORT}/api-docs`);
+  console.log(` Server running on: ${BASE_URL}/api-docs`);
 });
