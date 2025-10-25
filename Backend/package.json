@@ -5,7 +5,7 @@
   "main": "Backend/Login/server.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node Backend/Login/server.js"
+    "start": "node Login/server.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
