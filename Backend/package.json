@@ -7,9 +7,6 @@
   "scripts": {
     "start": "node Backend/Login/server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "body-parser": "^2.2.0",
